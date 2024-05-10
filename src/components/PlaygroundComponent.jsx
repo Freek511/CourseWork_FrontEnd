@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
-import {createPlayground} from "../services/PlaygroundService.js";
-import {useNavigate} from "react-router-dom";
+import React, {useEffect, useState} from 'react';
+import {createPlayground, getPlayground, updatePlayground} from "../services/PlaygroundService.js";
+import {useNavigate, useParams} from "react-router-dom";
 
 const PlaygroundComponent = () => {
 
@@ -10,7 +10,23 @@ const PlaygroundComponent = () => {
     const [price, setPrice] = useState('');
     const [capacity, setCapacity] = useState('');
 
+    const {id} = useParams();
     const navigator =  useNavigate()
+    useEffect(() =>{
+        if(id){
+            getPlayground(id).then((response) =>{
+                setArea(response.data.area)
+                setPrice(response.data.price)
+                setName(response.data.name)
+                setCapacity(response.data.capacity)
+                setDescription(response.data.description)
+            }).catch((error) =>{
+                console.log(error)
+            })
+
+        }
+    }, [id])
+
     const [errors,setErrors] = useState({
         name: '',
         description: '',
@@ -19,17 +35,28 @@ const PlaygroundComponent = () => {
         capacity: ''
     })
 
-    function savePlayground(e){
+    function saveOrUpdatePlayground(e){
         e.preventDefault();
+        const playground = {name, description, area, price, capacity};
+        console.log(playground);
 
         if(validForm()){
-            const playground = {name, description, area, price, capacity};
-            console.log(playground);
-
-            createPlayground(playground).then((response) =>{
-                console.log(response.data);
-                navigator('/')
-            })
+            if(id){
+                updatePlayground(id, playground).then((response) => {
+                    console.log(response.data)
+                    navigator('/playgrounds')
+                }).catch((error) => {
+                    console.log(error)
+                })
+            }
+            else{
+                createPlayground(playground).then((response) =>{
+                    console.log(response.data);
+                    navigator('/playground')
+                }).catch((error) => {
+                    console.log(error)
+                })
+            }
         }
     }
 
@@ -76,11 +103,21 @@ const PlaygroundComponent = () => {
         return valid;
     }
 
+    function pageTitle(){
+        if(id){
+            return <h2 className="text-center">Update Playground</h2>
+        }
+        else {
+            <h2 className="text-center">Add Playground</h2>
+        }
+
+    }
+
     return (
         <div className="container mt-2">
             <div className="row">
                 <div className="card col-md-6 offset-md-3 ">
-                    <h2 className="text-center">Add Playground</h2>
+                    {pageTitle()}
                     <div className="card-body">
                         <form>
                             <div className="form-group mb-2">
@@ -143,7 +180,7 @@ const PlaygroundComponent = () => {
                                 </input>
                                 {errors.capacity && <div className='invalid-feedback'> {errors.capacity }</div>}
                             </div>
-                            <button className="btn btn-success" onClick={savePlayground}>Add Playground</button>
+                            <button className="btn btn-success" onClick={saveOrUpdatePlayground}>Apply</button>
                         </form>
                     </div>
                 </div>

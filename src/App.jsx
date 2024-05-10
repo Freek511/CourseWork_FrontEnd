@@ -16,8 +16,9 @@ function App() {
                  <Route path='/' element={< ListPlaygroundsComponent /> }/>
                  <Route path='/playgrounds' element={< ListPlaygroundsComponent /> }/>
                  <Route path='/add-playground' element={< PlaygroundComponent/>}/>
+                 <Route path='/edit-playground/:id'  element={< PlaygroundComponent/>}/>
              </Routes>
-            <FooterComponent/>
+            {/*<FooterComponent/>*/}
         </BrowserRouter>
     </>
   )

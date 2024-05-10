@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {listOfPlaygrounds} from "../services/PlaygroundService.js";
+import {deletePlayground, listOfPlaygrounds} from "../services/PlaygroundService.js";
 import {useNavigate} from "react-router-dom";
 
 const ListPlaygroundsComponent = () => {
@@ -8,16 +8,34 @@ const ListPlaygroundsComponent = () => {
 
     const [playgrounds, setPlaygrounds] = useState([])
     useEffect(()=> {
+        getAllPlaygrounds()
+    }, [])
+
+    function getAllPlaygrounds(){
         listOfPlaygrounds().then((response) => {
             console.log(response)
             setPlaygrounds(response.data);
         }).catch((error) => {
             console.error(error);
         })
-    }, [])
+    }
+
 
     function addPlayground(){
         navigator('/add-playground')
+    }
+    function updatePlayground(id){
+        navigator(`/edit-playground/` + id)
+        console.log(id)
+    }
+    function removePlayground(id){
+        console.log(id)
+        deletePlayground(id).then(() =>{
+            getAllPlaygrounds();
+        }).catch((error) =>{
+            console.log(error)
+        })
+
     }
 
 
@@ -36,8 +54,12 @@ const ListPlaygroundsComponent = () => {
                                     <p className="card-text">Price {playground.price}</p>
                                     <p className="card-text">Area {playground.area}</p>
                                     <p className="card-text">Capacity {playground.capacity}</p>
-                                    <a href="#" className="card-link">Подробнее</a>
-                                    <a href="#" className="card-link">Another link</a>
+                                    <a href="" className="card-link"
+                                        onClick={() => updatePlayground(playground.id)}>
+                                        Изменить</a>
+                                    <a href="" className="card-link"
+                                       onClick={()=>removePlayground(playground.id)}
+                                    >Удалить</a>
                                 </div>
                             </div>
                         </div>
