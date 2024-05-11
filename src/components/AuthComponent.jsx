@@ -1,0 +1,122 @@
+import React, {useState} from 'react';
+import {useNavigate} from "react-router-dom";
+import {registerUser} from "../services/AuthService.js";
+
+
+const AuthComponent = () => {
+
+    const [login, setLogin] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const role = 'USER'
+
+    const navigator =  useNavigate()
+
+    const [errors,setErrors] = useState({
+        login: '',
+        email: '',
+        password: '',
+        message: ''
+    })
+    function validForm(){
+        let valid = true;
+        const errorsCopy = {... errors}
+
+        if(login.trim()){
+            errorsCopy.login = ''
+        }
+        else{
+            errorsCopy.login = 'Login is required'
+            valid = false;
+        }
+        if(email.trim()){
+            errorsCopy.email = ''
+        }
+        else{
+            errorsCopy.email = 'Email is required'
+            valid = false;
+        }
+        if(password.trim()){
+            errorsCopy.password = ''
+        }
+        else{
+            errorsCopy.password = 'Password is required'
+            valid = false;
+        }
+
+        setErrors(errorsCopy)
+        return valid;
+    }
+
+    function registerSubmit(e){
+        e.preventDefault()
+        const user = {login, email, password, role}
+        console.log(user)
+
+        if(validForm()){
+            registerUser(user).then((response) => {
+                console.log(response.data)
+                navigator('/playgrounds')
+            }).catch((error) => {
+                console.log(error.response.data)
+            })
+        }
+    }
+
+
+    return (
+        <div className="container mt-2">
+            <div className="row">
+                <div className="card col-md-6 offset-md-3 ">
+                    <h1 className="text-center">Registration</h1>
+                    <div className="card-body">
+                        <form>
+                            <div className="form-group mb-2">
+                                <label htmlFor="name" className="form-label">Login</label>
+                                <input
+                                    type="text"
+                                    value={login}
+                                    placeholder="Enter Login"
+                                    className={`form-control ${errors.login ? `is-invalid` : ''}`}
+                                    onChange={(e) => setLogin(e.target.value)}
+                                >
+                                </input>
+                                {errors.login && <div className='invalid-feedback'> {errors.login}</div>}
+                            </div>
+                            <div className="form-group mb-2">
+                                <label htmlFor="name" className="form-label">Email</label>
+                                <input
+                                    type="text"
+                                    value={email}
+                                    placeholder="Enter Email"
+                                    className={`form-control ${errors.email ? `is-invalid` : ''}`}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                >
+                                </input>
+                                {errors.email && <div className='invalid-feedback'> {errors.email}</div>}
+                            </div>
+                            <div className="form-group mb-2">
+                                <label htmlFor="name" className="form-label">Password</label>
+                                <input
+                                    type="text"
+                                    value={password}
+                                    placeholder="Enter Password"
+                                    className={`form-control ${errors.password ? `is-invalid` : ''}`}
+                                    onChange={(e) => setPassword(e.target.value)}
+                                >
+                                </input>
+                                {errors.password && <div className='invalid-feedback'> {errors.password}</div>}
+                            </div>
+
+                            <button className="btn btn-success" onClick={registerSubmit}>Register</button>
+                            {errors.message && <div className='invalid-feedback'> {errors.message}</div>}
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    );
+};
+
+export default AuthComponent;

@@ -52,7 +52,7 @@ const PlaygroundComponent = () => {
             else{
                 createPlayground(playground).then((response) =>{
                     console.log(response.data);
-                    navigator('/playground')
+                    navigator('/playgrounds')
                 }).catch((error) => {
                     console.log(error)
                 })
@@ -78,21 +78,21 @@ const PlaygroundComponent = () => {
             errorsCopy.description = 'Description is required'
             valid = false;
         }
-        if(price.trim()){
+        if(price){
             errorsCopy.price = ''
         }
         else{
             errorsCopy.price = 'Price is required'
             valid = false;
         }
-        if(area.trim()){
+        if(area){
             errorsCopy.area = ''
         }
         else{
             errorsCopy.area = 'Area is required'
             valid = false;
         }
-        if(capacity.trim()){
+        if(capacity){
             errorsCopy.capacity = ''
         }
         else{
@@ -108,7 +108,7 @@ const PlaygroundComponent = () => {
             return <h2 className="text-center">Update Playground</h2>
         }
         else {
-            <h2 className="text-center">Add Playground</h2>
+            return <h2 className="text-center">Add Playground</h2>
         }
 
     }
@@ -147,7 +147,7 @@ const PlaygroundComponent = () => {
                             <div className="form-group mb-2">
                                 <label htmlFor="name" className="form-label">Area</label>
                                 <input
-                                    type="number"
+                                    type="text"
                                     value={area}
                                     placeholder="Enter Area"
                                     className={`form-control ${errors.area ? `is-invalid` : ''}`}
@@ -159,7 +159,7 @@ const PlaygroundComponent = () => {
                             <div className="form-group mb-2">
                                 <label htmlFor="name" className="form-label">Price</label>
                                 <input
-                                    type="number"
+                                    type="text"
                                     value={price}
                                     placeholder="Enter Price"
                                     className={`form-control ${errors.price ? `is-invalid` : ''}`}
@@ -171,7 +171,7 @@ const PlaygroundComponent = () => {
                             <div className="form-group mb-2">
                                 <label htmlFor="number" className="form-label">Capacity</label>
                                 <input
-                                    type="number"
+                                    type="text"
                                     value={capacity}
                                     placeholder="Enter Capacity"
                                     className={`form-control ${errors.capacity ? `is-invalid` : ''}`}
@@ -185,7 +185,6 @@ const PlaygroundComponent = () => {
                     </div>
                 </div>
             </div>
-
         </div>
     );
 };
