@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {useNavigate} from "react-router-dom";
 import {registerUser} from "../services/AuthService.js";
+import useSignIn from "react-auth-kit/hooks/useSignIn";
 
 
 const AuthComponent = () => {
@@ -11,12 +12,12 @@ const AuthComponent = () => {
     const role = 'USER'
 
     const navigator =  useNavigate()
+    const signIn = useSignIn()
 
     const [errors,setErrors] = useState({
         login: '',
         email: '',
         password: '',
-        message: ''
     })
     function validForm(){
         let valid = true;
@@ -55,10 +56,20 @@ const AuthComponent = () => {
 
         if(validForm()){
             registerUser(user).then((response) => {
-                console.log(response.data)
+                console.log(response)
+                signIn({
+                    auth:{
+                        token: response.data.token,
+                        type: 'Bearer',
+                    },
+                    userState:{
+                        email: user.email,
+                        role: user.role
+                    }
+                })
                 navigator('/playgrounds')
             }).catch((error) => {
-                console.log(error.response.data)
+                console.log(error.response)
             })
         }
     }
@@ -109,7 +120,6 @@ const AuthComponent = () => {
                             </div>
 
                             <button className="btn btn-success" onClick={registerSubmit}>Register</button>
-                            {errors.message && <div className='invalid-feedback'> {errors.message}</div>}
                         </form>
                     </div>
                 </div>
