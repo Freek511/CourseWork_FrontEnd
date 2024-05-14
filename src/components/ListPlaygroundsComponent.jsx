@@ -1,10 +1,17 @@
 import React, {useEffect, useState} from 'react';
 import {deletePlayground, listOfPlaygrounds} from "../services/PlaygroundService.js";
 import {useNavigate} from "react-router-dom";
+import useAuthHeader from "react-auth-kit/hooks/useAuthHeader";
 
 const ListPlaygroundsComponent = () => {
 
     const navigator = useNavigate();
+    const config = {
+        headers: {
+            Authorization: useAuthHeader()
+        }
+    }
+
 
     const [playgrounds, setPlaygrounds] = useState([])
     useEffect(()=> {
@@ -12,7 +19,7 @@ const ListPlaygroundsComponent = () => {
     }, [])
 
     function getAllPlaygrounds(){
-        listOfPlaygrounds().then((response) => {
+        listOfPlaygrounds(config).then((response) => {
             console.log(response)
             setPlaygrounds(response.data);
         }).catch((error) => {

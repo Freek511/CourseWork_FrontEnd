@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {createPlayground, getPlayground, updatePlayground} from "../services/PlaygroundService.js";
 import {useNavigate, useParams} from "react-router-dom";
+import useAuthHeader from "react-auth-kit/hooks/useAuthHeader";
 
 const PlaygroundComponent = () => {
 
@@ -9,12 +10,17 @@ const PlaygroundComponent = () => {
     const [area, setArea] = useState('');
     const [price, setPrice] = useState('');
     const [capacity, setCapacity] = useState('');
+    const config = {
+        headers: {
+            Authorization: useAuthHeader()
+        }
+    }
 
     const {id} = useParams();
     const navigator =  useNavigate()
     useEffect(() =>{
         if(id){
-            getPlayground(id).then((response) =>{
+            getPlayground(id, config).then((response) =>{
                 setArea(response.data.area)
                 setPrice(response.data.price)
                 setName(response.data.name)
@@ -42,7 +48,7 @@ const PlaygroundComponent = () => {
 
         if(validForm()){
             if(id){
-                updatePlayground(id, playground).then((response) => {
+                updatePlayground(id, playground, config).then((response) => {
                     console.log(response.data)
                     navigator('/playgrounds')
                 }).catch((error) => {
@@ -50,7 +56,7 @@ const PlaygroundComponent = () => {
                 })
             }
             else{
-                createPlayground(playground).then((response) =>{
+                createPlayground(playground, config).then((response) =>{
                     console.log(response.data);
                     navigator('/playgrounds')
                 }).catch((error) => {
