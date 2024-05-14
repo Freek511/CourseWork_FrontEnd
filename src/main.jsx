@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import "jquery/dist/jquery.min.js";
+import 'bootstrap/dist/js/bootstrap.bundle'
 import AuthProvider from "react-auth-kit";
 import createStore from "react-auth-kit/createStore";
 
