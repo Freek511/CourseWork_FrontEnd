@@ -2,18 +2,22 @@ import React, {useEffect, useState} from 'react';
 import {deletePlayground, listOfPlaygrounds} from "../services/PlaygroundService.js";
 import {useNavigate} from "react-router-dom";
 import useAuthHeader from "react-auth-kit/hooks/useAuthHeader";
+import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 
 const ListPlaygroundsComponent = () => {
 
-    const navigator = useNavigate();
     const config = {
         headers: {
             Authorization: useAuthHeader()
         }
     }
 
-
+    const navigator = useNavigate();
     const [playgrounds, setPlaygrounds] = useState([])
+    const authUser = useAuthUser()
+    const userRole = authUser.role
+
+
     useEffect(()=> {
         getAllPlaygrounds()
     }, [])
@@ -49,7 +53,8 @@ const ListPlaygroundsComponent = () => {
     return (
         <div className="container-lg">
             <h1 className="text-center">List of Playgrounds</h1>
-            <button type="button" className="btn btn-dark m-1" onClick={addPlayground}>Add Playground</button>
+            { userRole === 'ADMIN' &&
+                <button type="button" className="btn btn-dark m-1" onClick={addPlayground}>Add Playground</button>}
             <div className="row row-cols-1 row-cols-md-3 g-4">
                 {
                     playgrounds.map(playground =>
@@ -61,12 +66,14 @@ const ListPlaygroundsComponent = () => {
                                     <p className="card-text">Price {playground.price}</p>
                                     <p className="card-text">Area {playground.area}</p>
                                     <p className="card-text">Capacity {playground.capacity}</p>
-                                    <a href="" className="card-link"
+                                    {userRole === 'ADMIN' &&
+                                        <a href="" className="card-link"
                                         onClick={() => updatePlayground(playground.id)}>
-                                        Изменить</a>
-                                    <a href="" className="card-link"
-                                       onClick={()=>removePlayground(playground.id)}
-                                    >Удалить</a>
+                                        Изменить</a>}
+                                    {userRole === 'ADMIN' &&
+                                        <a href="" className="card-link"
+                                        onClick={() => removePlayground(playground.id)}
+                                    >Удалить</a>}
                                 </div>
                             </div>
                         </div>

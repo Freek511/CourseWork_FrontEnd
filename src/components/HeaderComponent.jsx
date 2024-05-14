@@ -6,7 +6,7 @@ import useIsAuthenticated from "react-auth-kit/hooks/useIsAuthenticated";
 const HeaderComponent = () => {
 
     const logout = useSignOut()
-    const navigate = useNavigate();
+    const navigate = useNavigate()
     const isAuthenticated = useIsAuthenticated()
 
     function handleLogout() {
@@ -19,7 +19,7 @@ const HeaderComponent = () => {
         <div>
             <nav className="navbar navbar-expand-lg navbar-black bg-black">
                 <div className="container-fluid">
-                    <a className="navbar-brand text-white" href="#">PGTOP</a>
+                    <a className="navbar-brand text-white" href="#">PBTOP</a>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
                             aria-expanded="false" aria-label="Toggle navigation">
