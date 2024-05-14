@@ -121,6 +121,9 @@ const RegistrationComponent = () => {
                                 </input>
                                 {errors.password && <div className='invalid-feedback'> {errors.password}</div>}
                             </div>
+                            <p>If you already have an account just <a href="/login"
+                                                         className="link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover">
+                                Sign In!</a></p>
 
                             <button className="btn btn-success" onClick={registerSubmit}>Register</button>
                             {regError && <div className="text-center text-dark"> {regError}</div>}

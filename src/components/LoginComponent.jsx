@@ -74,7 +74,7 @@ const RegistrationComponent = () => {
         <div className="container mt-2">
             <div className="row">
                 <div className="card col-md-6 offset-md-3 ">
-                    <h1 className="text-center">Registration</h1>
+                    <h1 className="text-center">Login</h1>
                     <div className="card-body">
                         <form>
                             <div className="form-group mb-2">
@@ -101,6 +101,9 @@ const RegistrationComponent = () => {
                                 </input>
                                 {errors.password && <div className='invalid-feedback'> {errors.password}</div>}
                             </div>
+                            <p>Don't have an account? <a href="/register"
+                                  className="link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover">
+                                Create it right now!</a></p>
 
                             <button className="btn btn-success" onClick={loginSubmit}>Login</button>
                             {regError && <div className="text-center text-dark"> {regError}</div>}
