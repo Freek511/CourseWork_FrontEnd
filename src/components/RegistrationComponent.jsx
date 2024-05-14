@@ -4,11 +4,12 @@ import {registerUser} from "../services/AuthService.js";
 import useSignIn from "react-auth-kit/hooks/useSignIn";
 
 
-const AuthComponent = () => {
+const RegistrationComponent = () => {
 
     const [login, setLogin] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [regError, setRegError] = useState(null);
     const role = 'USER'
 
     const navigator =  useNavigate()
@@ -56,6 +57,7 @@ const AuthComponent = () => {
 
         if(validForm()){
             registerUser(user).then((response) => {
+
                 console.log(response)
                 signIn({
                     auth:{
@@ -69,7 +71,8 @@ const AuthComponent = () => {
                 })
                 navigator('/playgrounds')
             }).catch((error) => {
-                console.log(error.response)
+                console.log(error.response.data.token)
+                setRegError(error.response.data.token)
             })
         }
     }
@@ -95,7 +98,7 @@ const AuthComponent = () => {
                                 {errors.login && <div className='invalid-feedback'> {errors.login}</div>}
                             </div>
                             <div className="form-group mb-2">
-                                <label htmlFor="name" className="form-label">Email</label>
+                                <label htmlFor="email" className="form-label">Email</label>
                                 <input
                                     type="text"
                                     value={email}
@@ -107,7 +110,7 @@ const AuthComponent = () => {
                                 {errors.email && <div className='invalid-feedback'> {errors.email}</div>}
                             </div>
                             <div className="form-group mb-2">
-                                <label htmlFor="name" className="form-label">Password</label>
+                                <label htmlFor="password" className="form-label">Password</label>
                                 <input
                                     type="text"
                                     value={password}
@@ -120,6 +123,7 @@ const AuthComponent = () => {
                             </div>
 
                             <button className="btn btn-success" onClick={registerSubmit}>Register</button>
+                            {regError && <div className="text-center text-dark"> {regError}</div>}
                         </form>
                     </div>
                 </div>
@@ -129,4 +133,4 @@ const AuthComponent = () => {
     );
 };
 
-export default AuthComponent;
+export default RegistrationComponent;
