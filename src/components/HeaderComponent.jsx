@@ -19,7 +19,7 @@ const HeaderComponent = () => {
         <div>
             <nav className="navbar navbar-expand-lg navbar-black bg-black">
                 <div className="container-fluid">
-                    <a className="navbar-brand text-white" href="#">PBTOP</a>
+                    <a className="navbar-brand text-white" href="/">PBTOP</a>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
                             aria-expanded="false" aria-label="Toggle navigation">
@@ -33,7 +33,7 @@ const HeaderComponent = () => {
                             {!isAuthenticated &&
                                 <a className="nav-link text-white" href="/register">Registration</a>}
                             {isAuthenticated &&
-                                <a className="nav-link text-white" href="#">Orders</a>}
+                                <a className="nav-link text-white" href="/orders">Orders</a>}
                             {isAuthenticated &&
                                 <a className="nav-link text-white" href="" onClick={handleLogout}>Logout</a>}
                         </div>

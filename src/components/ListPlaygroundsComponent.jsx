@@ -46,20 +46,28 @@ const ListPlaygroundsComponent = () => {
         }).catch((error) =>{
             console.log(error)
         })
-
     }
+    function showPlayground(id) {
+        navigator(`/playgrounds/` + id)
+        console.log(id)
+    }
+     const getRandom = (min, max)=>{
+        return Math.floor(Math.random() * (max - min)) + min
+     }
+
 
 
     return (
         <div className="container-lg">
-            <h1 className="text-center">List of Playgrounds</h1>
+            <h1 className="text-center mb-2 mt-2">List of Playgrounds</h1>
             { userRole === 'ADMIN' &&
                 <button type="button" className="btn btn-dark m-1" onClick={addPlayground}>Add Playground</button>}
-            <div className="row row-cols-1 row-cols-md-3 g-4">
+            <div className="row row-cols-1 row-cols-md-3 g-4 mt-2">
                 {
                     playgrounds.map(playground =>
                         <div key={playground.id} className="col">
-                            <div className="card text-dark bg-light mb-3" style={{width: 18 + 'rem'}}>
+                            <div className="card border-black text-dark bg-light mb-3 h-100" style={{width: 18 + 'rem'}}>
+                                <img src={`/image${getRandom(1,10)}.jpg`} className="card-img-top" alt="..."/>
                                 <div className="card-body">
                                     <h5 className="card-title">{playground.name}</h5>
                                     <h6 className="card-subtitle mb-2 text-muted">{playground.description}</h6>
@@ -68,12 +76,15 @@ const ListPlaygroundsComponent = () => {
                                     <p className="card-text">Capacity {playground.capacity}</p>
                                     {userRole === 'ADMIN' &&
                                         <a href="" className="card-link"
-                                        onClick={() => updatePlayground(playground.id)}>
-                                        Изменить</a>}
+                                           onClick={() => updatePlayground(playground.id)}>
+                                            Изменить</a>}
                                     {userRole === 'ADMIN' &&
                                         <a href="" className="card-link"
-                                        onClick={() => removePlayground(playground.id)}
-                                    >Удалить</a>}
+                                           onClick={() => removePlayground(playground.id)}
+                                        >Удалить</a>}
+                                    <a href="" className="card-link"
+                                       onClick={() => showPlayground(playground.id)}
+                                    >Подробнее</a>
                                 </div>
                             </div>
                         </div>
