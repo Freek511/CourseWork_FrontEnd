@@ -52,6 +52,7 @@ const RegistrationComponent = () => {
 
     function registerSubmit(e){
         e.preventDefault()
+        setRegError(null)
         const user = {login, email, password, role}
         console.log(user)
 
@@ -91,7 +92,7 @@ const RegistrationComponent = () => {
                                     type="text"
                                     value={login}
                                     placeholder="Enter Login"
-                                    className={`form-control ${errors.login ? `is-invalid` : ''}`}
+                                    className={`form-control ${errors.login || regError ? `is-invalid` : ''}`}
                                     onChange={(e) => setLogin(e.target.value)}
                                 >
                                 </input>
@@ -103,7 +104,7 @@ const RegistrationComponent = () => {
                                     type="text"
                                     value={email}
                                     placeholder="Enter Email"
-                                    className={`form-control ${errors.email ? `is-invalid` : ''}`}
+                                    className={`form-control ${errors.email || regError ? `is-invalid` : ''}`}
                                     onChange={(e) => setEmail(e.target.value)}
                                 >
                                 </input>
@@ -115,7 +116,7 @@ const RegistrationComponent = () => {
                                     type="text"
                                     value={password}
                                     placeholder="Enter Password"
-                                    className={`form-control ${errors.password ? `is-invalid` : ''}`}
+                                    className={`form-control ${errors.password || regError ? `is-invalid` : ''}`}
                                     onChange={(e) => setPassword(e.target.value)}
                                 >
                                 </input>
@@ -125,8 +126,8 @@ const RegistrationComponent = () => {
                                                          className="link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover">
                                 Sign In!</a></p>
 
-                            <button className="btn btn-success" onClick={registerSubmit}>Register</button>
-                            {regError && <div className="text-center text-dark"> {regError}</div>}
+                            <button className="btn btn-dark" onClick={registerSubmit}>Register</button>
+                            {regError && <div className="text-center text-dark mt-1"> {regError}</div>}
                         </form>
                     </div>
                 </div>
