@@ -9,7 +9,7 @@ const RegistrationComponent = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [regError, setRegError] = useState(null);
+    const [logError, setLogError] = useState(null);
 
     const navigator =  useNavigate()
     const signIn = useSignIn()
@@ -63,8 +63,8 @@ const RegistrationComponent = () => {
                 })
                 navigator('/playgrounds')
             }).catch((error) => {
-                console.log(error.response.data.token)
-                setRegError(error.response.data.token)
+                console.log(error.response)
+                setLogError('Bad email or password!')
             })
         }
     }
@@ -101,12 +101,12 @@ const RegistrationComponent = () => {
                                 </input>
                                 {errors.password && <div className='invalid-feedback'> {errors.password}</div>}
                             </div>
-                            <p>Don't have an account? <a href="/register"
+                            <p> Don't have an account? <a href="/register"
                                   className="link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover">
                                 Create it right now!</a></p>
 
                             <button className="btn btn-success" onClick={loginSubmit}>Login</button>
-                            {regError && <div className="text-center text-dark"> {regError}</div>}
+                            {logError && <div className="text-center text-dark"> {logError}</div>}
                         </form>
                     </div>
                 </div>

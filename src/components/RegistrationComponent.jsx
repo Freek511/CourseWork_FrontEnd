@@ -71,7 +71,7 @@ const RegistrationComponent = () => {
                 })
                 navigator('/playgrounds')
             }).catch((error) => {
-                console.log(error.response.data.token)
+                console.log(error.response)
                 setRegError(error.response.data.token)
             })
         }
