@@ -124,7 +124,7 @@ const ListOrdersComponent = () => {
                 </tbody>
             </table>
             {orders.length === 0 && (
-                <p> Don't have any orders? <a href="/playgrounds"
+                <p> Don't have any orders? <a onClick={() => navigator('/playgrounds')}
                 className="link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover">
                 Add it right now!</a></p>)
             }
