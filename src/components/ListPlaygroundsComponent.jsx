@@ -66,25 +66,30 @@ const ListPlaygroundsComponent = () => {
                 {
                     playgrounds.map(playground =>
                         <div key={playground.id} className="col">
-                            <div className="card border-black text-dark bg-light mb-3 h-100" style={{width: 18 + 'rem'}}>
-                                <img src={`/image${getRandom(1,10)}.jpg`} className="card-img-top" alt="..."/>
+                            <div className="card border-black text-dark bg-light mb-3 h-100"
+                                 style={{width: 18 + 'rem'}}>
+                                <img onClick={() => showPlayground(playground.id)}
+                                     src={`/image${getRandom(1,10)}.jpg`} className="card-img-top" alt="..."/>
                                 <div className="card-body">
-                                    <h5 className="card-title">{playground.name}</h5>
+                                    <h5 className="card-title">Playground {playground.name}</h5>
                                     <h6 className="card-subtitle mb-2 text-muted">{playground.description}</h6>
-                                    <p className="card-text">Price {playground.price}</p>
-                                    <p className="card-text">Area {playground.area}</p>
-                                    <p className="card-text">Capacity {playground.capacity}</p>
-                                    {userRole === 'ADMIN' &&
-                                        <a href="" className="card-link"
-                                           onClick={() => updatePlayground(playground.id)}>
-                                            Изменить</a>}
-                                    {userRole === 'ADMIN' &&
-                                        <a href="" className="card-link"
-                                           onClick={() => removePlayground(playground.id)}
-                                        >Удалить</a>}
-                                    <a href="" className="card-link"
-                                       onClick={() => showPlayground(playground.id)}
-                                    >Подробнее</a>
+                                    <p className="card-text">Price: {playground.price} $</p>
+                                    <p className="card-text">Area: {playground.area} m<sup><small>2</small></sup></p>
+                                    <p className="card-text">Max capacity: {playground.capacity} people</p>
+                                    <div className="btn-group-vertical">
+                                        <a href="" className="btn btn-dark mt-1"
+                                           onClick={() => showPlayground(playground.id)}
+                                        >More Info</a>
+                                        {userRole === 'ADMIN' &&
+                                            <a href="" className="btn btn-dark mt-1 "
+                                               onClick={() => updatePlayground(playground.id)}>
+                                                Update</a>}
+                                        {userRole === 'ADMIN' &&
+                                            <a href="" className="btn btn-danger mt-1 "
+                                               onClick={() => removePlayground(playground.id)}
+                                            >Delete</a>}
+
+                                    </div>
                                 </div>
                             </div>
                         </div>

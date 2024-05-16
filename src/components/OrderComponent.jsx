@@ -126,17 +126,25 @@ const OrderComponent = () => {
 
     }
 
+    const getRandom = (min, max)=>{
+        return Math.floor(Math.random() * (max - min)) + min
+    }
+
 
     return (
         <div className="container text-center">
             <div className="row">
-                <div className="col-8">Must be a image</div>
-                <div className="col-4 align-self-center">
-                    <p>{name}</p>
-                    <p>{description}</p>
-                    <p>{price}</p>
-                    <p>{area}</p>
-                    <p>{capacity}</p>
+                <div className="col-8">
+                    <img src={`/image${getRandom(1, 10)}.jpg`} className="img-fluid mt-2" alt="..."/>
+                </div>
+                <div className="col-4 align-self-center ">
+                    <div className="border border-4 border-dark mb-2 mt-2">
+                        <p className="fs-2 border-bottom border-dark border-4">Playground {name}</p>
+                        <p className="fs-3 border-bottom border-dark border-4">Description: {description}</p>
+                        <p className="fs-3 border-bottom border-dark border-4">Price: {price} $</p>
+                        <p className="fs-3 border-bottom border-dark border-4">Area: {area} m<sup><small>2</small></sup></p>
+                        <p className="fs-3">Max Capacity: {capacity} people</p>
+                    </div>
                     <div className="input-group mb-3">
                         <label className="input-group-text" htmlFor="inputGroupSelect01">Date</label>
                         <select className={`form-select form-control ${errors.date || createOrUpdateError ? `is-invalid` : ''}`}
