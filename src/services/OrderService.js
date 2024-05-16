@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-const BASE_URL = 'http://localhost:8080/api/v1/orders';
+const BASE_URL = 'https://coursework-e95v.onrender.com/api/v1/orders';
 
 export const createOrder = (order, config) =>
     axios.post(`${BASE_URL}/create`, order, config);

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 
-const BASE_URL = 'http://localhost:8080/api/v1/playgrounds';
+const BASE_URL = 'https://coursework-e95v.onrender.com/api/v1/playgrounds';
 
 
 export const listOfPlaygrounds = (config) => axios.get(BASE_URL + '/all', config)
