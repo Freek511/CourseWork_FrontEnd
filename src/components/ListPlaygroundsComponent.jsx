@@ -77,15 +77,15 @@ const ListPlaygroundsComponent = () => {
                                     <p className="card-text">Area: {playground.area} m<sup><small>2</small></sup></p>
                                     <p className="card-text">Max capacity: {playground.capacity} people</p>
                                     <div className="btn-group-vertical">
-                                        <a href="" className="btn btn-dark mt-1"
+                                        <a className="btn btn-dark mt-1"
                                            onClick={() => showPlayground(playground.id)}
                                         >More Info</a>
                                         {userRole === 'ADMIN' &&
-                                            <a href="" className="btn btn-dark mt-1 "
+                                            <a className="btn btn-dark mt-1 "
                                                onClick={() => updatePlayground(playground.id)}>
                                                 Update</a>}
                                         {userRole === 'ADMIN' &&
-                                            <a href="" className="btn btn-danger mt-1 "
+                                            <a className="btn btn-danger mt-1 "
                                                onClick={() => removePlayground(playground.id)}
                                             >Delete</a>}
 

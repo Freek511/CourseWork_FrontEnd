@@ -123,7 +123,7 @@ const RegistrationComponent = () => {
                                 {errors.password && <div className='invalid-feedback'> {errors.password}</div>}
                             </div>
                             <p>If you already have an account just
-                                <a href="" onClick={()=> navigator('/login')}
+                                <a onClick={()=> navigator('/login')}
                                    className="link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover">
                                     Sign In!</a></p>
 

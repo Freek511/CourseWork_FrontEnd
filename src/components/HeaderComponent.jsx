@@ -19,7 +19,7 @@ const HeaderComponent = () => {
         <div>
             <nav className="navbar navbar-expand-lg navbar-black bg-black">
                 <div className="container-fluid">
-                    <a className="navbar-brand text-white fs-2" href="" onClick={()=> navigate('/')}>PBTOP</a>
+                    <a className="navbar-brand text-white fs-2" onClick={()=> navigate('/')}>PBTOP</a>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse"
                             data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
                             aria-expanded="false" aria-label="Toggle navigation">
@@ -27,19 +27,19 @@ const HeaderComponent = () => {
                     </button>
                     <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                         <div className="navbar-nav fs-5">
-                            <a className="nav-link text-white" href="" onClick={()=> navigate('/playgrounds')}>
+                            <a className="nav-link text-white" onClick={()=> navigate('/playgrounds')}>
                                 Playgrounds</a>
                             {!isAuthenticated &&
-                                <a className="nav-link text-white" href=""> onClick={()=> navigate('/login')}
+                                <a className="nav-link text-white" onClick={()=> navigate('/login')}>
                                     Login</a>}
                             {!isAuthenticated &&
-                                <a className="nav-link text-white" href="" onClick={()=> navigate('/register')}>
+                                <a className="nav-link text-white" onClick={()=> navigate('/register')}>
                                     Registration</a>}
                             {isAuthenticated &&
-                                <a className="nav-link text-white" href="" onClick={()=> navigate('/orders')}>
+                                <a className="nav-link text-white" onClick={()=> navigate('/orders')}>
                                     Orders</a>}
                             {isAuthenticated &&
-                                <a className="nav-link text-white" href="" onClick={handleLogout}>Logout</a>}
+                                <a className="nav-link text-white" onClick={handleLogout}>Logout</a>}
                         </div>
                     </div>
                 </div>

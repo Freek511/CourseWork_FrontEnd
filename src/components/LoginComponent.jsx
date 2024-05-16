@@ -102,7 +102,7 @@ const RegistrationComponent = () => {
                                 </input>
                                 {errors.password && <div className='invalid-feedback'> {errors.password}</div>}
                             </div>
-                            <p> Don't have an account? <a onClick={() => navigator('/register')} href=""
+                            <p> Don't have an account? <a onClick={() => navigator('/register')}
                                   className="link-body-emphasis link-offset-2 link-underline-opacity-25 link-underline-opacity-75-hover">
                                 Create it right now!</a></p>
 
