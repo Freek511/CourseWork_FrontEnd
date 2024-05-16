@@ -4,6 +4,7 @@ import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 import {deleteOrder, getAllOrdersByUser, getAllOrdersForAdmin} from "../services/OrderService.js";
 import {useNavigate} from "react-router-dom";
 import {getPlayground} from "../services/PlaygroundService.js";
+import {sendEmail} from "../services/EmailService.js";
 
 
 
@@ -59,6 +60,17 @@ const ListOrdersComponent = () => {
         navigator('/edit-order/'+id)
     }
 
+    function acceptOrderHandler(id){
+        sendEmail(id).then((response) => {
+            console.log(response.data)
+        }).catch((error) => {
+            console.log(error)
+        }).finally(() =>{
+            deleteOrderHandler(id)
+            alert("Check your email for details")
+        })
+    }
+
     function pageTitle(email){
         if (userRole === 'ADMIN'){
             return <h2>List of order for Admin with email - {email}</h2>
@@ -100,11 +112,14 @@ const ListOrdersComponent = () => {
                         <tr key={order.id}>
                             <th scope="row">{order.id}</th>
                             {userRole === 'ADMIN' && <td>{order.user_id}</td>}
-                            <td>{test(order.playground_id) + order.playground_id }</td>
+                            <td>{order.playground_id }</td>
                             <td>{order.orderDate}</td>
                             <td>price</td>
                             <td>
-                                <button className="btn btn-success m-1">Accept</button>
+                                <button className="btn btn-success m-1"
+                                        onClick={() => acceptOrderHandler(order.id)}>
+                                    Accept
+                                </button>
                                 <button className="btn btn-dark m-1"
                                         onClick={() => updateOrderHandler(order.id)}>
                                     Update
