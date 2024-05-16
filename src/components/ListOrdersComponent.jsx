@@ -3,7 +3,6 @@ import useAuthHeader from "react-auth-kit/hooks/useAuthHeader";
 import useAuthUser from "react-auth-kit/hooks/useAuthUser";
 import {deleteOrder, getAllOrdersByUser, getAllOrdersForAdmin} from "../services/OrderService.js";
 import {useNavigate} from "react-router-dom";
-import {getPlayground} from "../services/PlaygroundService.js";
 import {sendEmail} from "../services/EmailService.js";
 
 
@@ -21,7 +20,6 @@ const ListOrdersComponent = () => {
     const userRole = authUser.role
     const userEmail = authUser.email
     const navigator =  useNavigate()
-    let some = ''
 
     useEffect(()=> {
         getAllOrders()
@@ -73,24 +71,13 @@ const ListOrdersComponent = () => {
 
     function pageTitle(email){
         if (userRole === 'ADMIN'){
-            return <h2>List of order for Admin with email - {email}</h2>
+            return <h2 className="mt-2">List of order for Admin with email - {email}</h2>
         }
         else{
-            return  <h2>List of orders for User with email - {email}</h2>
+            return  <h2 className="mt-2">List of orders for User with email - {email}</h2>
         }
     }
 
-    function test(pgid){
-
-        getPlayground(pgid, config).then(response => {
-            some = response.data.name
-            console.log(some)
-        }).catch((error) => {
-            console.log(error)
-        })
-        console.log(some)
-        return some
-    }
 
     return (
         <div>
@@ -112,7 +99,7 @@ const ListOrdersComponent = () => {
                         <tr key={order.id}>
                             <th scope="row">{order.id}</th>
                             {userRole === 'ADMIN' && <td>{order.user_id}</td>}
-                            <td>{order.playground_id }</td>
+                            <td> {order.playground_id}</td>
                             <td>{order.orderDate}</td>
                             <td>price</td>
                             <td>
