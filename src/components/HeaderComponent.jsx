@@ -27,19 +27,19 @@ const HeaderComponent = () => {
                     </button>
                     <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                         <div className="navbar-nav fs-5">
-                            <a className="nav-link text-white" onClick={()=> navigate('/playgrounds')}>
+                            <a href="" className="nav-link text-white" onClick={()=> navigate('/playgrounds')}>
                                 Playgrounds</a>
                             {!isAuthenticated &&
-                                <a className="nav-link text-white" onClick={()=> navigate('/login')}>
+                                <a href="" className="nav-link text-white" onClick={()=> navigate('/login')}>
                                     Login</a>}
                             {!isAuthenticated &&
-                                <a className="nav-link text-white" onClick={()=> navigate('/register')}>
+                                <a href="" className="nav-link text-white" onClick={()=> navigate('/register')}>
                                     Registration</a>}
                             {isAuthenticated &&
-                                <a className="nav-link text-white" onClick={()=> navigate('/orders')}>
+                                <a href="" className="nav-link text-white" onClick={()=> navigate('/orders')}>
                                     Orders</a>}
                             {isAuthenticated &&
-                                <a className="nav-link text-white" onClick={handleLogout}>Logout</a>}
+                                <a href="" className="nav-link text-white" onClick={handleLogout}>Logout</a>}
                         </div>
                     </div>
                 </div>
