@@ -10,7 +10,7 @@ export const getAllOrdersByUser = (config) =>
 export const getAllOrdersForAdmin = (config) =>
     axios.get(`${BASE_URL}/admin/all`, config)
 export const deleteOrder = (order_id, config) =>
-    axios.delete(`${BASE_URL}/delete/${order_id}`, config);
+    axios.delete(`${BASE_URL}/delete-hard/${order_id}`, config);
 export const getOrderById = (order_id, config) =>
     axios.get(`${BASE_URL}/${order_id}`, config)
 export const updateOrder = (order_id, order, config) =>
